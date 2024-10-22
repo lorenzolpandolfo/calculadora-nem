@@ -1,4 +1,5 @@
 from animal import Animal
+from operations import Operations
 
 # Weight loss
 DOG_LOSS_WEIGHT_MULTIPLIER = 64
@@ -28,11 +29,11 @@ OBESE_CAT_WEIGHT_MAINTANCE_KCAL = 0.4
 
 
 # Menu constants
-MAIN_TITLE = "Calculadora de Necessidade Energética\n"
-MENU_OPTIONS = ["Manutenção do Peso", "Perda de Peso", "Ganho de Peso"]
-ANIMAL_SELECT_TITLE = "Selecione o Animal:\n"
+TITLE_MAIN = "Calculadora de Necessidade Energética\n"
+TITLE_ANIMAL_SELECT = "Selecione o Animal:\n"
+TITLE_SELECT_ANIMAL_WEIGHT = "[?] Qual o peso corporal do animal? "
+TITLE_LOOP = "[?] Calcular novamente? (aperte ENTER para SIM)\n"
+
+MENU_OPTIONS = [Operations.WEIGHT_MAINTENANCE.to_string(), Operations.WEIGHT_REDUCE.to_string(), Operations.WEIGHT_GAIN.to_string()]
+
 ANIMALS = [Animal.CAT, Animal.DOG]
-
-
-
-
