@@ -13,10 +13,9 @@ INACTIVE_DOG_WEIGHT_MAINTANCE_KCAL = 95
 ACTIVE_DOG_WEIGHT_MAINTANCE_KCAL = 130
 
 # Weight maintance
-# Confirmar esses valores:
-RESTING_DOG_WEIGHT_MAINTANCE_EXPOENT = 0.25 
+RESTING_DOG_WEIGHT_MAINTANCE_EXPOENT = 0.75 
 INACTIVE_DOG_WEIGHT_MAINTANCE_EXPOENT = 0.75
-ACTIVE_DOG_WEIGHT_MAINTANCE_EXPOENT = 0.25
+ACTIVE_DOG_WEIGHT_MAINTANCE_EXPOENT = 0.75
 
 
 SLIM_CAT_WEIGHT_MAINTANCE_KCAL = 63.5
@@ -31,9 +30,8 @@ OBESE_CAT_WEIGHT_MAINTANCE_KCAL = 0.4
 # Menu constants
 TITLE_MAIN = "Calculadora de Necessidade Energética\n"
 TITLE_ANIMAL_SELECT = "Selecione o Animal:\n"
-TITLE_SELECT_ANIMAL_WEIGHT = "[?] Qual o peso corporal do animal? "
+TITLE_SELECT_ANIMAL_WEIGHT = "\n[?] Qual o peso corporal do animal? "
 TITLE_LOOP = "[?] Calcular novamente? (aperte ENTER para SIM)\n"
 
 MENU_OPTIONS = [Operations.WEIGHT_MAINTENANCE.to_string(), Operations.WEIGHT_REDUCE.to_string(), Operations.WEIGHT_GAIN.to_string()]
-
 ANIMALS = [Animal.CAT, Animal.DOG]
