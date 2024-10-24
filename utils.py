@@ -2,18 +2,27 @@ from animal import Animal
 from constants import *
 import math
 
-kcal_mapping = {
+kcal_mapping_dogs = {
         Condition.RESTING: RESTING_DOG_WEIGHT_MAINTANCE_KCAL,
         Condition.INACTIVE: INACTIVE_DOG_WEIGHT_MAINTANCE_KCAL,
         Condition.ACTIVE: ACTIVE_DOG_WEIGHT_MAINTANCE_KCAL,
+    }
+
+
+kcal_mapping_cats = {
+        Condition.ACTIVE: ACTIVE_CAT_WEIGHT_MAINTANCE_KCAL,
         Condition.INDOOR: INDOOR_CAT_WEIGHT_MAINTANCE_KCAL,
         Condition.OBESE: OBESE_CAT_WEIGHT_MAINTANCE_KCAL,
     }
 
-expoent_mapping = {
+expoent_mapping_dogs = {
         Condition.RESTING: RESTING_DOG_WEIGHT_MAINTANCE_EXPOENT,
         Condition.INACTIVE: INACTIVE_DOG_WEIGHT_MAINTANCE_EXPOENT,
         Condition.ACTIVE: ACTIVE_DOG_WEIGHT_MAINTANCE_EXPOENT,
+}
+
+expoent_mapping_cats = {
+        Condition.ACTIVE: ACTIVE_CAT_WEIGHT_MAINTANCE_EXPOENT,
         Condition.INDOOR: INDOOR_CAT_WEIGHT_MAINTANCE_EXPOENT,
         Condition.OBESE: OBESE_CAT_WEIGHT_MAINTANCE_EXPOENT,
 }
@@ -38,6 +47,9 @@ def calc_weight_loss(animal: Animal, corporal_weight: float) -> float:
 
 
 def calc_weight_maintance(animal: Animal, corporal_weight: float, fisiologic_condition: Condition) -> float:
+    kcal_mapping = kcal_mapping_dogs if animal == Animal.DOG else kcal_mapping_cats
+    expoent_mapping = expoent_mapping_dogs if animal == Animal.DOG else expoent_mapping_cats
+
     necessary_kcal = kcal_mapping.get(fisiologic_condition, 0)
     expoent = expoent_mapping.get(fisiologic_condition, 0)
 

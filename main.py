@@ -1,3 +1,5 @@
+import os
+
 from utils import *
 from constants import *
 from animal import Animal
@@ -18,11 +20,10 @@ def select_animal_type():
     return Animal(animal_id)
     
 
-def calculate_ne(operation: str, animal: str, corporal_weight: float):
+def calculate_ne(operation: str, animal: Animal, corporal_weight: float, f_condition: Condition):
     match operation:
         case 1:
-            fisiologic_condition_id = draw_menu("Selecione a Condição Fisiológica do Animal:\n", [c.to_string() for c in MENU_FISIOLOGIC_CONDITIONS])
-            return calc_weight_maintance(animal, corporal_weight, Condition(fisiologic_condition_id))
+            return calc_weight_maintance(animal, corporal_weight, f_condition)
 
         case 2:
             return calc_weight_loss(animal, corporal_weight)
@@ -37,14 +38,23 @@ def generate_report(title: str = "[Relatório Final]", data: dict | bool = False
     operation_format = Operations(operation).to_string()
     corporal_weight = data['corporal_weight']
     grams_of_food = data['grams_of_food']
+    f_condition_format = Condition(f_condition).to_string()
 
-    print(f"[=] Para um {animal_format} de {corporal_weight}kg, na opção {operation_format}, a Necessidade Energética (NE) é de {ne_value:.2f}kcal" +
-          f" e a quantidade DIÁRIA de ração é de {grams_of_food:.2f} gramas.\n")
+    print(f"\n> Para um {animal_format} de {corporal_weight}kg na condição {f_condition_format} e na opção {operation_format},\n" +
+          f"a Necessidade Energética (NE) é de {ne_value:.2f}kcal e a quantidade DIÁRIA de ração é de {grams_of_food:.2f} gramas.\n" +
+          f"Considerando 3 refeições por dia, cada uma deve ter {(grams_of_food / 3):.2f} gramas.\n")
 
 
 def calculate_amount_of_food(ne: float) -> float:
-    kcal_in_kg = float(input("[?] Quantas Kcal tem em 1kg da ração? ").replace(",", "."))
+    kcal_in_kg = float(input("\n[?] Quantas Kcal tem em 1kg da ração? ").replace(",", "."))
     return get_diary_amount_of_food(ne, kcal_in_kg)
+
+
+def select_fisiologic_condition(animal: Animal):
+    is_cat = animal == Animal.CAT
+    f_conditions = MENU_CAT_FISIOLOGIC_CONDITIONS if is_cat else MENU_DOG_FISIOLOGIC_CONDITIONS
+    fc_id = draw_menu("Selecione a Condição Fisiológica do Animal:\n", [c.to_string() for c in f_conditions])
+    return Condition(f_conditions[fc_id - 1])
 
 
 if __name__ == "__main__":
@@ -53,13 +63,15 @@ if __name__ == "__main__":
         operation = draw_menu()
         animal = select_animal_type()
         corporal_weight = float(input(TITLE_SELECT_ANIMAL_WEIGHT).replace(",", "."))
-        ne_value = calculate_ne(operation, animal, corporal_weight)
+        f_condition = select_fisiologic_condition(animal)
+        ne_value = calculate_ne(operation, animal, corporal_weight, f_condition)
         grams_of_food = calculate_amount_of_food(ne_value)
 
         data = {
             'operation': operation,
             'animal': animal,
             'corporal_weight': corporal_weight,
+            'f_condition': f_condition,
             'ne_value': ne_value,
             'grams_of_food': grams_of_food
         }
@@ -69,5 +81,7 @@ if __name__ == "__main__":
         log.create_log_record(data)
 
         loop = input(TITLE_LOOP)
+        os.system('cls')
+        
         if loop != "":
             exit()

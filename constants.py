@@ -40,5 +40,9 @@ TITLE_SELECT_ANIMAL_WEIGHT = "\n[?] Qual o peso corporal do animal? "
 TITLE_LOOP = "[?] Calcular novamente? (aperte ENTER para SIM)\n"
 
 MENU_OPTIONS = [Operations.WEIGHT_MAINTENANCE, Operations.WEIGHT_REDUCE, Operations.WEIGHT_GAIN]
+
 MENU_FISIOLOGIC_CONDITIONS = [Condition.ACTIVE, Condition.INACTIVE, Condition.RESTING, Condition.INDOOR, Condition.OBESE]
+MENU_CAT_FISIOLOGIC_CONDITIONS = [Condition.ACTIVE, Condition.INDOOR, Condition.OBESE]
+MENU_DOG_FISIOLOGIC_CONDITIONS = [Condition.RESTING, Condition.INACTIVE, Condition.ACTIVE]
+
 ANIMALS = [Animal.CAT, Animal.DOG]
