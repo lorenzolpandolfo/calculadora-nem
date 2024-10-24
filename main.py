@@ -67,7 +67,7 @@ if __name__ == "__main__":
         corporal_weight = float(input(TITLE_SELECT_ANIMAL_WEIGHT).replace(",", "."))
         f_condition = False
         
-        if operation == Operations.WEIGHT_MAINTENANCE:
+        if operation == Operations.WEIGHT_MAINTENANCE.value:
             f_condition = select_fisiologic_condition(animal)
 
         ne_value = calculate_ne(operation, animal, corporal_weight, f_condition)
